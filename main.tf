@@ -42,6 +42,8 @@ module "app" {
   scale_min_instances           = each.value.scale_min_instances
   scale_request_timeout         = each.value.scale_request_timeout
   scale_down_delay              = each.value.scale_down_delay
+
+  run_compute_resource_token_enabled = each.value.run_compute_resource_token_enabled
 }
 
 ##############################################################################
@@ -68,6 +70,8 @@ module "job" {
   scale_max_execution_time      = each.value.scale_max_execution_time
   scale_memory_limit            = each.value.scale_memory_limit
   scale_retry_limit             = each.value.scale_retry_limit
+
+  run_compute_resource_token_enabled = each.value.run_compute_resource_token_enabled
 }
 
 ##############################################################################

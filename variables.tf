@@ -73,6 +73,8 @@ variable "apps" {
     scale_min_instances           = optional(number)
     scale_request_timeout         = optional(number)
     scale_down_delay              = optional(number)
+
+    run_compute_resource_token_enabled = optional(bool, false)
   }))
   default = {}
 }
@@ -107,6 +109,8 @@ variable "jobs" {
     scale_max_execution_time      = optional(number)
     scale_memory_limit            = optional(string)
     scale_retry_limit             = optional(number)
+
+    run_compute_resource_token_enabled = optional(bool, false)
   }))
   default = {}
 }

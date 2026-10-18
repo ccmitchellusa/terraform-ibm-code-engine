@@ -39,7 +39,7 @@ You need the following permissions to run this module.
 | Name | Version |
 | ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.79.0, < 3.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.88.0, < 3.0.0 |
 
 ### Modules
 
@@ -64,6 +64,7 @@ No modules.
 | <a name="input_run_arguments"></a> [run\_arguments](#input\_run\_arguments) | Arguments for the app that are passed to start the container. | `list(string)` | `[]` | no |
 | <a name="input_run_as_user"></a> [run\_as\_user](#input\_run\_as\_user) | The user ID (UID) to run the app. | `number` | `null` | no |
 | <a name="input_run_commands"></a> [run\_commands](#input\_run\_commands) | Commands for the app that are passed to start the container. | `list(string)` | `[]` | no |
+| <a name="input_run_compute_resource_token_enabled"></a> [run\_compute\_resource\_token\_enabled](#input\_run\_compute\_resource\_token\_enabled) | Whether to mount a compute resource token into the container file system of the app. The app can exchange the token for an IAM access token of a trusted profile that trusts it, instead of using an API key. | `bool` | `false` | no |
 | <a name="input_run_env_variables"></a> [run\_env\_variables](#input\_run\_env\_variables) | References to config maps, secrets or a literal values that are exposed as environment variables within the running application. | <pre>list(object({<br/>    type      = optional(string)<br/>    name      = optional(string)<br/>    value     = optional(string)<br/>    prefix    = optional(string)<br/>    key       = optional(string)<br/>    reference = optional(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_run_service_account"></a> [run\_service\_account](#input\_run\_service\_account) | The name of the service account. | `string` | `"default"` | no |
 | <a name="input_run_volume_mounts"></a> [run\_volume\_mounts](#input\_run\_volume\_mounts) | Optional mounts of config maps or a secrets. | <pre>list(object({<br/>    mount_path = string<br/>    reference  = string<br/>    type       = string<br/>  }))</pre> | `[]` | no |

@@ -26,6 +26,8 @@ resource "ibm_code_engine_app" "ce_app" {
   scale_request_timeout         = var.scale_request_timeout
   scale_down_delay              = var.scale_down_delay
 
+  run_compute_resource_token_enabled = var.run_compute_resource_token_enabled
+
   dynamic "run_env_variables" {
     for_each = var.run_env_variables != null ? var.run_env_variables : []
     content {

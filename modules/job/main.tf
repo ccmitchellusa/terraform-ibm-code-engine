@@ -22,6 +22,8 @@ resource "ibm_code_engine_job" "ce_job" {
   scale_retry_limit             = var.scale_retry_limit
   scale_memory_limit            = var.scale_memory_limit
 
+  run_compute_resource_token_enabled = var.run_compute_resource_token_enabled
+
   dynamic "run_env_variables" {
     for_each = var.run_env_variables != null ? var.run_env_variables : []
     content {
