@@ -170,6 +170,17 @@ module "code_engine" {
       scale_memory_limit            = "32G"
       scale_ephemeral_storage_limit = "300M"
       managed_domain_mappings       = "local_private"
+      probe_readiness = {
+        type          = "http"
+        path          = "/"
+        initial_delay = 5
+      }
+      probe_liveness = {
+        type              = "http"
+        path              = "/"
+        interval          = 30
+        failure_threshold = 3
+      }
     }
     "${var.prefix}-app2" = {
       image_reference = "icr.io/codeengine/helloworld"

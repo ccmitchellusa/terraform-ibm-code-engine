@@ -21,6 +21,11 @@ module "app" {
         name  = "env_name"
         value = "env_value"
     }]
+  # Optional health probes. If not set, Code Engine applies its default probe.
+  probe_readiness = {
+    type = "http"
+    path = "/health"
+  }
 }
 ```
 
@@ -60,6 +65,8 @@ No modules.
 | <a name="input_image_secret"></a> [image\_secret](#input\_image\_secret) | The name of the image registry access secret. | `string` | `null` | no |
 | <a name="input_managed_domain_mappings"></a> [managed\_domain\_mappings](#input\_managed\_domain\_mappings) | Define which of the following values for the system-managed domain mappings to set up for the application: `local_public`, `local_private`, and `local`. See https://cloud.ibm.com/docs/codeengine?topic=codeengine-application-workloads#optionsvisibility | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the app. | `string` | n/a | yes |
+| <a name="input_probe_liveness"></a> [probe\_liveness](#input\_probe\_liveness) | Optional liveness probe for the app. A failing liveness probe restarts the app instance. If null, no probe is set by this module and Code Engine applies its default. Supported attributes: `type` (`tcp` or `http`, defaults to `tcp`), `path` (only for `http`), `port` (defaults to the app port), `initial_delay`, `interval`, `timeout` (all in seconds) and `failure_threshold`. | <pre>object({<br/>    type              = optional(string, "tcp")<br/>    path              = optional(string)<br/>    port              = optional(number)<br/>    initial_delay     = optional(number)<br/>    interval          = optional(number)<br/>    timeout           = optional(number)<br/>    failure_threshold = optional(number)<br/>  })</pre> | `null` | no |
+| <a name="input_probe_readiness"></a> [probe\_readiness](#input\_probe\_readiness) | Optional readiness probe for the app. Traffic is only routed to an app instance after its readiness probe succeeds. If null, no probe is set by this module and Code Engine applies its default. Supported attributes: `type` (`tcp` or `http`, defaults to `tcp`), `path` (only for `http`), `port` (defaults to the app port), `initial_delay`, `interval`, `timeout` (all in seconds) and `failure_threshold`. | <pre>object({<br/>    type              = optional(string, "tcp")<br/>    path              = optional(string)<br/>    port              = optional(number)<br/>    initial_delay     = optional(number)<br/>    interval          = optional(number)<br/>    timeout           = optional(number)<br/>    failure_threshold = optional(number)<br/>  })</pre> | `null` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The ID of the project where app will be created. | `string` | n/a | yes |
 | <a name="input_run_arguments"></a> [run\_arguments](#input\_run\_arguments) | Arguments for the app that are passed to start the container. | `list(string)` | `[]` | no |
 | <a name="input_run_as_user"></a> [run\_as\_user](#input\_run\_as\_user) | The user ID (UID) to run the app. | `number` | `null` | no |

@@ -46,4 +46,30 @@ resource "ibm_code_engine_app" "ce_app" {
       type       = run_volume_mounts.value["type"]
     }
   }
+
+  dynamic "probe_liveness" {
+    for_each = var.probe_liveness != null ? [var.probe_liveness] : []
+    content {
+      type              = probe_liveness.value["type"]
+      path              = probe_liveness.value["path"]
+      port              = probe_liveness.value["port"]
+      initial_delay     = probe_liveness.value["initial_delay"]
+      interval          = probe_liveness.value["interval"]
+      timeout           = probe_liveness.value["timeout"]
+      failure_threshold = probe_liveness.value["failure_threshold"]
+    }
+  }
+
+  dynamic "probe_readiness" {
+    for_each = var.probe_readiness != null ? [var.probe_readiness] : []
+    content {
+      type              = probe_readiness.value["type"]
+      path              = probe_readiness.value["path"]
+      port              = probe_readiness.value["port"]
+      initial_delay     = probe_readiness.value["initial_delay"]
+      interval          = probe_readiness.value["interval"]
+      timeout           = probe_readiness.value["timeout"]
+      failure_threshold = probe_readiness.value["failure_threshold"]
+    }
+  }
 }
