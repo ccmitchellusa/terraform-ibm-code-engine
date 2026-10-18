@@ -56,6 +56,8 @@ variable "apps" {
       mount_path = string
       reference  = string
       type       = string
+      sub_path   = optional(string)
+      read_only  = optional(bool)
     })))
     image_port                    = optional(number)
     managed_domain_mappings       = optional(string)
@@ -115,6 +117,8 @@ variable "jobs" {
       mount_path = string
       reference  = string
       type       = string
+      sub_path   = optional(string)
+      read_only  = optional(bool)
     })))
     run_arguments                 = optional(list(string))
     run_as_user                   = optional(number)

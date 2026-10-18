@@ -37,11 +37,13 @@ variable "run_env_variables" {
 }
 
 variable "run_volume_mounts" {
-  description = "Optional mounts of config maps or a secrets."
+  description = "Optional mounts of config maps, secrets or persistent data stores. `type` is one of `config_map`, `secret` or `persistent_data_store`. `sub_path` is the path within the referenced resource that is mounted at `mount_path`. `read_only` applies only to mounts of type `persistent_data_store`; if not set, the provider default (`true`) applies."
   type = list(object({
     mount_path = string
     reference  = string
     type       = string
+    sub_path   = optional(string)
+    read_only  = optional(bool)
   }))
   default = []
 }

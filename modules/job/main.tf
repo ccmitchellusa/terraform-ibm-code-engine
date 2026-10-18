@@ -42,6 +42,8 @@ resource "ibm_code_engine_job" "ce_job" {
       mount_path = run_volume_mounts.value["mount_path"]
       reference  = run_volume_mounts.value["reference"]
       type       = run_volume_mounts.value["type"]
+      sub_path   = run_volume_mounts.value["sub_path"]
+      read_only  = run_volume_mounts.value["read_only"]
     }
   }
 }
