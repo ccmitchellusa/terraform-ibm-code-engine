@@ -145,3 +145,51 @@ variable "scale_down_delay" {
   type        = number
   default     = 0
 }
+
+variable "probe_liveness" {
+  description = "Optional liveness probe for the app. A failing liveness probe restarts the app instance. If null, no probe is set by this module and Code Engine applies its default. Supported attributes: `type` (`tcp` or `http`, defaults to `tcp`), `path` (only for `http`), `port` (defaults to the app port), `initial_delay`, `interval`, `timeout` (all in seconds) and `failure_threshold`."
+  type = object({
+    type              = optional(string, "tcp")
+    path              = optional(string)
+    port              = optional(number)
+    initial_delay     = optional(number)
+    interval          = optional(number)
+    timeout           = optional(number)
+    failure_threshold = optional(number)
+  })
+  default = null
+
+  validation {
+    condition     = var.probe_liveness == null || contains(["tcp", "http"], try(var.probe_liveness.type, "tcp"))
+    error_message = "The value of 'probe_liveness.type' must be 'tcp' or 'http'."
+  }
+
+  validation {
+    condition     = var.probe_liveness == null || try(var.probe_liveness.path, null) == null || try(var.probe_liveness.type, null) == "http"
+    error_message = "'probe_liveness.path' is only supported when 'probe_liveness.type' is 'http'."
+  }
+}
+
+variable "probe_readiness" {
+  description = "Optional readiness probe for the app. Traffic is only routed to an app instance after its readiness probe succeeds. If null, no probe is set by this module and Code Engine applies its default. Supported attributes: `type` (`tcp` or `http`, defaults to `tcp`), `path` (only for `http`), `port` (defaults to the app port), `initial_delay`, `interval`, `timeout` (all in seconds) and `failure_threshold`."
+  type = object({
+    type              = optional(string, "tcp")
+    path              = optional(string)
+    port              = optional(number)
+    initial_delay     = optional(number)
+    interval          = optional(number)
+    timeout           = optional(number)
+    failure_threshold = optional(number)
+  })
+  default = null
+
+  validation {
+    condition     = var.probe_readiness == null || contains(["tcp", "http"], try(var.probe_readiness.type, "tcp"))
+    error_message = "The value of 'probe_readiness.type' must be 'tcp' or 'http'."
+  }
+
+  validation {
+    condition     = var.probe_readiness == null || try(var.probe_readiness.path, null) == null || try(var.probe_readiness.type, null) == "http"
+    error_message = "'probe_readiness.path' is only supported when 'probe_readiness.type' is 'http'."
+  }
+}

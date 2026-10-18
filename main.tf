@@ -42,6 +42,8 @@ module "app" {
   scale_min_instances           = each.value.scale_min_instances
   scale_request_timeout         = each.value.scale_request_timeout
   scale_down_delay              = each.value.scale_down_delay
+  probe_liveness                = each.value.probe_liveness
+  probe_readiness               = each.value.probe_readiness
 }
 
 ##############################################################################

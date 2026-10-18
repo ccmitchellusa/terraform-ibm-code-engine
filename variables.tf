@@ -73,6 +73,24 @@ variable "apps" {
     scale_min_instances           = optional(number)
     scale_request_timeout         = optional(number)
     scale_down_delay              = optional(number)
+    probe_liveness = optional(object({
+      type              = optional(string, "tcp")
+      path              = optional(string)
+      port              = optional(number)
+      initial_delay     = optional(number)
+      interval          = optional(number)
+      timeout           = optional(number)
+      failure_threshold = optional(number)
+    }))
+    probe_readiness = optional(object({
+      type              = optional(string, "tcp")
+      path              = optional(string)
+      port              = optional(number)
+      initial_delay     = optional(number)
+      interval          = optional(number)
+      timeout           = optional(number)
+      failure_threshold = optional(number)
+    }))
   }))
   default = {}
 }
