@@ -50,6 +50,8 @@ module "code_engine" {
       }]
       run_arguments = ["echo \"hello world\""]
       run_commands  = ["/bin/sh"]
+      # Mount a compute resource token, so the job can authenticate with a trusted profile
+      run_compute_resource_token_enabled = true
     },
     "${var.prefix}-job-2" = {
       image_reference = "icr.io/codeengine/helloworld"

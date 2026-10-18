@@ -193,3 +193,10 @@ variable "probe_readiness" {
     error_message = "'probe_readiness.path' is only supported when 'probe_readiness.type' is 'http'."
   }
 }
+
+variable "run_compute_resource_token_enabled" {
+  description = "Whether to mount a compute resource token into the container file system of the app. The app can exchange the token for an IAM access token of a trusted profile that trusts it, instead of using an API key."
+  type        = bool
+  default     = false
+  nullable    = false
+}

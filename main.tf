@@ -44,6 +44,8 @@ module "app" {
   scale_down_delay              = each.value.scale_down_delay
   probe_liveness                = each.value.probe_liveness
   probe_readiness               = each.value.probe_readiness
+
+  run_compute_resource_token_enabled = each.value.run_compute_resource_token_enabled
 }
 
 ##############################################################################
@@ -70,6 +72,8 @@ module "job" {
   scale_max_execution_time      = each.value.scale_max_execution_time
   scale_memory_limit            = each.value.scale_memory_limit
   scale_retry_limit             = each.value.scale_retry_limit
+
+  run_compute_resource_token_enabled = each.value.run_compute_resource_token_enabled
 }
 
 ##############################################################################
